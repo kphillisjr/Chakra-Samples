@@ -31,6 +31,9 @@ ChakraCoreHost::ChakraCoreHost()
 {
 	currentSourceContext = 0;
 	JsContextRef context;
+	// Initialize the ChakraCore runtime Library.
+	if (JsInitializeRuntime(0, nullptr) != JsNoError)
+		throw "failed to Initialize runtime.";
 
 	// Create the runtime. We're only going to use one runtime for this host.
 	if (JsCreateRuntime(JsRuntimeAttributeNone, nullptr, &runtime) != JsNoError)
@@ -309,6 +312,7 @@ JsErrorCode ChakraCoreHost::getPropertyID(const wchar_t *propertyName, JsPropert
 ChakraCoreHost::~ChakraCoreHost()
 {
 	JsDisposeRuntime(runtime);
+	JsFinalizeRuntime();
 }
 
 // ************************************************************

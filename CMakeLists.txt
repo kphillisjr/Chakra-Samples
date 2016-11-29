@@ -7,6 +7,12 @@ find_package(PkgConfig)
 pkg_check_modules(PC_ICU_UC icu-uc)
 pkg_check_modules(PC_ICU_I18N icu-i18n)
 
+# Find Deps for OpenGL Example.
+find_package(OpenGL)
+pkg_check_modules(PC_GLFW glfw3)
+pkg_check_modules(PC_GLEW glew)
+#TODO: embed glew and glfw.
+
 if(EXISTS "${CMAKE_SOURCE_DIR}/ChakraCore/CMakeLists.txt")
 	include("${CMAKE_SOURCE_DIR}/ChakraCore/ChakraAutoConfigure.cmake")
     CHAKRACORE_AUTOCONFIGURE()
